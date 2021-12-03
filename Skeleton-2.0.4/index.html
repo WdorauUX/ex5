@@ -5,9 +5,43 @@
   <!-- Basic Page Needs
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <meta charset="utf-8">
-  <title>Your page title here :)</title>
+  <title>The Dungeoneer's Spellbook</title>
   <meta name="description" content="">
   <meta name="author" content="">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <script type="text/javascript">
+	  $(document).ready(function() {
+		  var apikey = "3a4b13b073ef52e6582e9d37804de62e";
+
+		  $("#submitzip").click(function() {
+			  var zip = $("#zip").val();
+
+			  $.ajax({
+			      url: "http://api.openweathermap.org/data/2.5/weather",
+				  type: "get", //send it through get method
+				  data: {
+				    mode: "json",
+				    units: "imperial",
+				    zip: zip,
+					APPID: apikey
+				  },
+			      success: function(response) {
+					  $(".currentweather p").fadeOut(200, function() {
+					  	$(this).html("The current temperature in "+response.name+" is <strong>"+response.main.temp+"&#176;</strong> Farenheit").fadeIn(200);
+					  });
+                      console.log(response);
+					  //Do Something
+			      },
+			      error: function(xhr) {
+			          alert ("There was an error.");
+					  //Do Something to handle error
+			      }
+			  });
+		  });
+	  });
+  </script>
 
   <!-- Mobile Specific Metas
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -22,6 +56,23 @@
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/skeleton.css">
 
+  <style type="text/css">
+	  .row {
+		  margin-top: 5em;
+	  }
+	  .currentweather {
+		  background-color: #666;
+		  height: 20em;
+		  padding: 5em;
+		  color: #FFF;
+		  font-size: 1.4em;
+	  }
+	  .currentweather strong {
+		  font-weight: 700;
+		  font-size: 2.0em;
+	  }
+  </style>
+
   <!-- Favicon
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link rel="icon" type="image/png" href="images/favicon.png">
@@ -31,14 +82,19 @@
 
   <!-- Primary Page Layout
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <div class="container">
-    <div class="row">
-      <div class="one-half column" style="margin-top: 25%">
-        <h4>Basic Page</h4>
-        <p>This index.html page is a placeholder with the CSS, font and favicon. It's just waiting for you to add some content! If you need some help hit up the <a href="http://www.getskeleton.com">Skeleton documentation</a>.</p>
-      </div>
-    </div>
-  </div>
+  <section class="container">
+	<div class="row">
+		<div class="one-half column">
+			<h1>Weather Lookup</h1>
+			<p>Enter your zip code here:</p>
+			<p><input type="text" id="zip" name="zip" length="5" /></p>
+			<p><input type="submit" id="submitzip" />
+		</div>
+	  	<div class="one-half column currentweather">
+			<p><!-- weather will display here--></p>
+		</div>
+	</div>
+  </section>
 
 <!-- End Document
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
