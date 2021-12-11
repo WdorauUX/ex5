@@ -5,7 +5,7 @@
   <!-- Basic Page Needs
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <meta charset="utf-8">
-  <title>The Dungeoneer's Spellbook</title>
+  <title>The Adventurer's Spellbook</title>
   <meta name="description" content="">
   <meta name="author" content="">
 
@@ -13,23 +13,23 @@
 
   <script type="text/javascript">
 	  $(document).ready(function() {
-		  var apikey = "3a4b13b073ef52e6582e9d37804de62e";
 
-		  $("#submitzip").click(function() {
-			  var zip = $("#zip").val();
+		  $("#submitspell").click(function() {
+			  var i = $("#spelltext").val();
 
 			  $.ajax({
-			      url: "http://api.openweathermap.org/data/2.5/weather",
+            //https://www.dnd5eapi.co/api/spells/{index}
+            url: "https://www.dnd5eapi.co/api/spells/"+i,
 				  type: "get", //send it through get method
 				  data: {
-				    mode: "json",
-				    units: "imperial",
-				    zip: zip,
-					APPID: apikey
+				    //mode: "json",
+				    //units: "imperial",
+				    //i: ""
+				//	APPID: apikey
 				  },
 			      success: function(response) {
-					  $(".currentweather p").fadeOut(200, function() {
-					  	$(this).html("The current temperature in "+response.name+" is <strong>"+response.main.temp+"&#176;</strong> Farenheit").fadeIn(200);
+					  $(".myspellbook p").fadeOut(200, function() {
+					  	$(this).html("<strong> Here's what the spellbook has to say...</strong> "+response.desc).fadeIn(2500);
 					  });
                       console.log(response);
 					  //Do Something
@@ -60,17 +60,24 @@
 	  .row {
 		  margin-top: 5em;
 	  }
-	  .currentweather {
+	  .myspellbook {
 		  background-color: #666;
-		  height: 20em;
-		  padding: 5em;
+		  height: 25em;
+		  padding: 2em;
 		  color: #FFF;
-		  font-size: 1.4em;
+		  font-size: 1em;
 	  }
-	  .currentweather strong {
+	  .myspellbook strong {
 		  font-weight: 700;
-		  font-size: 2.0em;
+		  font-size: 2em;
 	  }
+    .spelld{
+      font-size: 2em;
+
+    }
+    .novice{
+      margin-right: 5%;
+    }
   </style>
 
   <!-- Favicon
@@ -85,13 +92,21 @@
   <section class="container">
 	<div class="row">
 		<div class="one-half column">
-			<h1>Weather Lookup</h1>
-			<p>Enter your zip code here:</p>
-			<p><input type="text" id="zip" name="zip" length="5" /></p>
-			<p><input type="submit" id="submitzip" />
+			<h1>The Adventurer's Spellbook</h1>
+			<p>Did you forget a spell? Quickly search for a refresher here:</p>
+			<p><input type="text" id="spelltext" name="spelltext" length="25" /></p>
+			<p><input type="submit" id="submitspell" />
+        <p>In case you are a novice wizard here are some classic spells</p>
+        <p>(enter these as they appear in the list below)</p>
+        <ul>
+          <li>acid-arrow</li>
+          <li>fireball</li>
+          <li>invisibilty</li>
+          <li>burning-hands</li>
+        </ul>
 		</div>
-	  	<div class="one-half column currentweather">
-			<p><!-- weather will display here--></p>
+	  	<div class="one-half column myspellbook">
+			<p id="spelld"><!-- spells will display here--></p>
 		</div>
 	</div>
   </section>

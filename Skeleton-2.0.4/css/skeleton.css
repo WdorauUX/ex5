@@ -392,6 +392,16 @@ hr {
   clear: both; }
 
 
+/* My Garbage
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+body{
+  background-image: url("../images/book.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+#submitspell{
+  background-color: white;
+}
 /* Media Queries
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 /*
