@@ -22,10 +22,6 @@
             url: "https://www.dnd5eapi.co/api/spells/"+i,
 				  type: "get", //send it through get method
 				  data: {
-				    //mode: "json",
-				    //units: "imperial",
-				    //i: ""
-				//	APPID: apikey
 				  },
 			      success: function(response) {
 					  $(".myspellbook p").fadeOut(200, function() {
@@ -46,11 +42,6 @@
   <!-- Mobile Specific Metas
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <!-- FONT
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
-
   <!-- CSS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link rel="stylesheet" href="css/normalize.css">
